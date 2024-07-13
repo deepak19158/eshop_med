@@ -82,29 +82,29 @@ const filterReducer = (state, action) => {
         });
       }
 
-      if (category && category !== "All") {
-        temp = temp.filter((curElem) => {
-          return curElem.category.toLowerCase().includes(category);
-        });
-      }
+      // if (category && category !== "All") {
+      //   temp = temp.filter((curElem) => {
+      //     return curElem.category.toLowerCase().includes(category);
+      //   });
+      // }
 
-      if (company && company !== "All") {
-        temp = temp.filter((curElem) => {
-          return curElem.company.toLowerCase().includes(company);
-        });
-      }
+      // if (company && company !== "All") {
+      //   temp = temp.filter((curElem) => {
+      //     return curElem.company.toLowerCase().includes(company);
+      //   });
+      // }
 
-      if (color && color !== "All") {
-        temp = temp.filter((curElem) => {
-          return curElem.colors.includes(color);
-        });
-      }
+      // if (color && color !== "All") {
+      //   temp = temp.filter((curElem) => {
+      //     return curElem.colors.includes(color);
+      //   });
+      // }
 
-      if (price) {
-        temp = temp.filter((curElem) => {
-          return curElem.price <= price;
-        });
-      }
+      // if (price) {
+      //   temp = temp.filter((curElem) => {
+      //     return curElem.price <= price;
+      //   });
+      // }
 
       return {
         ...state,

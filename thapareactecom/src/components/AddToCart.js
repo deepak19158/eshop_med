@@ -10,11 +10,11 @@ import { ToastContainer, toast } from "react-toastify";
 const AddToCart = ({ product }) => {
   const navigate = useNavigate();
 
-  const { _id, colors, stock } = product;
+  const { _id, stock=1 } = product;
   const productId = _id;
   const { addToCart } = useCartContext();
   
-  const [color, setColor] = useState(colors[0]);
+  // const [color, setColor] = useState(colors[0]);
   const [quantity, setQuanity] = useState(1);
 
   const handleOnClick = () => {
@@ -22,7 +22,7 @@ const AddToCart = ({ product }) => {
       navigate("/login");
       toast.error("Please login ");
     } else {
-      addToCart(productId, color, quantity, product);
+      addToCart(productId,  quantity, product);
       toast.success("Product Added to Cart");
     }
   };
@@ -39,7 +39,7 @@ const AddToCart = ({ product }) => {
     <Wrapper>
       <div className="colors">
         <ToastContainer />
-        <p>
+        {/* <p>
           Color:
           {colors.map((curColor, index) => {
             return (
@@ -53,7 +53,7 @@ const AddToCart = ({ product }) => {
               </button>
             );
           })}
-        </p>
+        </p> */}
       </div>
       {/* add to cart  */}
       <CartAmountToggle

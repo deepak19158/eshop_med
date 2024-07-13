@@ -13,66 +13,14 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: [true, "price must be provided"],
   },
-  colors: {
-    type: [String], // Array of strings for colors
-    required: true,
-  },
-  description: {
+  pack: {
     type: String,
     required: true,
   },
-  category: {
-    type: String,
-    required: true,
-  },
-  featured: {
-    type: Boolean,
-    default: false,
-  },
-  stock: {
+  code: {
     type: Number,
-    default: 5,
+    required: [true, "price must be provided"],
   },
-  reviews: {
-    type: Number,
-    default: 2,
-  },
-  stars: {
-    type: Number,
-    default: 2,
-  },
-  image: [
-    {
-      id: {
-        type: String,
-        required: true,
-      },
-      width: {
-        type: Number,
-        required: true,
-      },
-      height: {
-        type: Number,
-        required: true,
-      },
-      url: {
-        type: String,
-        required: true,
-      },
-      filename: {
-        type: String,
-        required: true,
-      },
-      size: {
-        type: Number,
-        required: true,
-      },
-      type: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
   createdAt: {
     type: Date,
     default: Date.now(),

@@ -6,26 +6,12 @@ import FormatPrice from "../../utils/FormatPrice";
 import { Button } from "../../styles/Button";
 
 const FilterSection = () => {
+
   const {
-    filters: { text, company, category, color, price, maxPrice, minPrice },
-    allProducts,
+    filters: { text },
     updateFilterValue,
-    clearFilters,
   } = useFilterContext();
 
-  const getUniqueData = (data, attr) => {
-    let newVal = data.map((curElem) => {
-      return curElem[attr];
-    });
-    if (attr === "colors") {
-      newVal = newVal.flat();
-    }
-    newVal = ["All", ...new Set(newVal)];
-    return newVal;
-  };
-  const categoryWiseData = getUniqueData(allProducts, "category");
-  const companyWiseData = getUniqueData(allProducts, "company");
-  const colorWiseData = getUniqueData(allProducts, "colors");
 
   return (
     <Wrapper>
@@ -36,98 +22,12 @@ const FilterSection = () => {
             name="text"
             value={text}
             onChange={updateFilterValue}
-            placeholder="SEARCH"
+            placeholder="Medicine"
+            style={{ maxWidth: '100%' }}
           />
         </form>
       </div>
-      <div className="filter-category">
-        <h3>Category</h3>
-        <div>
-          {categoryWiseData.map((curElem, index) => {
-            return (
-              <button
-                key={index}
-                type="button"
-                name="category"
-                value={curElem}
-                className={curElem === category ? "active" : ""}
-                onClick={updateFilterValue}
-              >
-                {curElem}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      <div className="filter-company">
-        <h3>Company</h3>
-        <form action="#">
-          <select
-            name="company"
-            id="company"
-            value={company}
-            className="filter-company--select"
-            onChange={updateFilterValue}
-          >
-            {companyWiseData.map((curElem, index) => {
-              return (
-                <option key={index} value={curElem}>
-                  {curElem}
-                </option>
-              );
-            })}
-          </select>
-        </form>
-      </div>
-
-      <div className="filter-colors colors">
-        <h3>Colors</h3>
-
-        <div className="filter-color-style">
-          {colorWiseData.map((curColor, index) => {
-            return (
-              <button
-                key={index}
-                type="button"
-                value={curColor}
-                name="color"
-                style={
-                  curColor === "All"
-                    ? { backgroundColor: "white", color: "black" }
-                    : { backgroundColor: curColor }
-                }
-                className={color === curColor ? "btnStyle active" : "btnStyle"}
-                onClick={updateFilterValue}
-              >
-                {curColor === "All" ? "All" : null}
-                {color === curColor ? <FaCheck className="checkStyle" /> : null}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      <div className="filter_price">
-        <h3>Price</h3>
-        <p>
-          <FormatPrice price={price} />
-        </p>
-        <input
-          type="range"
-          name="price"
-          max={maxPrice}
-          min={minPrice}
-          value={price}
-          onChange={updateFilterValue}
-        />
-      </div>
-
-      <div className="filter-clear">
-        <Button className="btn" onClick={clearFilters}>
-          Clear Filters
-        </Button>
-      </div>
+      
     </Wrapper>
   );
 };
@@ -142,10 +42,15 @@ const Wrapper = styled.section`
     font-size: bold;
   }
   .filter-search {
+    width: 80%; /* Set input width to 80% */
+    text-align: center; /* Center the input within its container */
+    margin: 0 auto; /* Center align horizontally */
+  
     input {
-      padding: 0.6rem 1rem;
-      width: 200px;
+      width: 100%;
+      padding: 0.6rem 0.5rem;
       height: 40px;
+      box-sizing: border-box; /* Ensure padding is included in the width */
     }
   }
   .filter-category {

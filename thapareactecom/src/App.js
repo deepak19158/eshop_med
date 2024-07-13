@@ -20,7 +20,6 @@ import ProtectedRoute from "./ProtectedRoute";
 import OrderSummary from "./components/profile/OrderSummary";
 import Loader from "./components/Loader";
 import Navbar from "./components/layout/Navbar";
-import UploadPrescription from "./UploadPrescription";
 
 const App = () => {
   const theme = {
@@ -66,7 +65,8 @@ const App = () => {
           <Navbar />
           <GlobalStyle />
           <Routes>
-            <Route path="/" element={<Home />} />
+            {/* <Route path="/" element={<Home />} /> */}
+            <Route path="/" element={<Products />} />
             <Route path="/about" element={<About />} />
             <Route path="/products" element={<Products />} />
             <Route path="/contact" element={<Contact />} />
@@ -78,15 +78,6 @@ const App = () => {
               element={
                 <ProtectedRoute>
                   <Cart />
-                </ProtectedRoute>
-              }
-            />
-
-            <Route
-              path="/UploadPrescription"
-              element={
-                <ProtectedRoute>
-                  <UploadPrescription />
                 </ProtectedRoute>
               }
             />

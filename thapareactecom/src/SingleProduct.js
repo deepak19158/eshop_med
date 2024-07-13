@@ -11,6 +11,7 @@ import FormatPrice from "./utils/FormatPrice";
 import { MdSecurity } from "react-icons/md";
 import { TbTruckDelivery, TbReplace } from "react-icons/tb";
 import Star from "./components/Star";
+import imagePath from "./utils/medicine.jpg";
 import AddToCart from "./components/AddToCart";
 
 // const API = "https://api.pujakaitem.com/api/products";
@@ -25,17 +26,16 @@ const SingleProduct = () => {
     useProductContext();
   const { id } = useParams();
 
+  // console.log(singleProduct);
+
   const {
     id: alias,
     name,
     company,
     price,
-    description,
-    category,
-    stock,
-    stars,
-    reviews,
-    image,
+    pack,
+    code,
+    stock =1,
   } = singleProduct;
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const SingleProduct = () => {
         <div className="grid grid-two-column">
           {/* product Images  */}
           <div className="product_images">
-            <MyImage imgs={image} />
+            <MyImage imgs={[imagePath]} />
           </div>
 
           {/* product dAta  */}
@@ -60,17 +60,17 @@ const SingleProduct = () => {
             <h2 style={{ textTransform: "capitalize", fontSize: "30px" }}>
               {name}
             </h2>
-            <Star stars={stars} reviews={reviews} />
-            <p className="product-data-price">
+            {/* <Star stars={stars} reviews={reviews} /> */}
+            {/* <p className="product-data-price">
               MRP:
               <del>
                 <FormatPrice price={price + 250000} />
               </del>
-            </p>
+            </p> */}
             <p className="product-data-price product-data-real-price">
-              Deal of the Day: <FormatPrice price={price} />
+              MRP: <FormatPrice price={price} />
             </p>
-            <p style={{ fontSize: "16px" }}>{description}</p>
+            {/* <p style={{ fontSize: "16px" }}>Pack: {pack}</p> */}
             <div className="product-data-warranty">
               <div className="product-warranty-data">
                 <TbTruckDelivery className="warranty-icon" />
@@ -94,12 +94,13 @@ const SingleProduct = () => {
             </div>
 
             <div className="product-data-info">
+            <p>Pack: <span>{pack}</span></p>
               <p>
                 Available:
                 <span> {stock > 0 ? "In Stock" : "Not Available"}</span>
               </p>
               <p>
-                ID : <span> {id} </span>
+                Code : <span> {code} </span>
               </p>
               <p>
                 Brand :<span> {company} </span>

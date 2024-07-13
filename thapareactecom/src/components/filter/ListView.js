@@ -2,26 +2,51 @@ import React from "react";
 import styled from "styled-components";
 import { Button } from "../../styles/Button";
 import FormatPrice from "../../utils/FormatPrice";
+import imagePath from "../../utils/medicine.jpg";
 import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-const ListView = ({ products }) => {
+const ListView = ({ products}) => {
+
+  const [loading, setLoading] = useState(false);
+  const [updatedProducts, setUpdatedProducts] = useState([]);
+  console.log(products);
+  // const [products,setProducts] = useState([]);
+  
+
+  useEffect(()=>{
+    console.log(products)
+    if(products){
+      setLoading(true);
+      setUpdatedProducts(products.slice(0,10));
+    }
+  },[products])
+
+
+  // const products = products_arr.slice(0,10);
+
   return (
+    <>
+    {!loading?<div>laoding</div>:
     <Wrapper className="section">
       <div className="container-grid">
-        {products.map((curElem) => {
-          const { _id, name, image, price, description } = curElem;
+        {updatedProducts.map((curElem) => {
+          const { _id, name,  company, price, pack, code } = curElem;
 
           return (
             <div className="card grid grid-two-column">
               <figure>
-                <img src={image[0].url} alt={name} />
+                <img src={imagePath} alt="medicine" />
               </figure>
               <div className="card-data">
                 <h3>{name}</h3>
+                <p>Company Name: {company}</p>
+                {/* <p>Code: {code}</p>
+                <p>Pack: {pack}</p> */}
                 <p>
-                  <FormatPrice price={price} />
+                  Price: <FormatPrice price={price} />
                 </p>
-                <p>{description.slice(0, 90)}...</p>
+                
 
                 <NavLink to={`/singleproduct/${_id}`} className="btn-main">
                   <Button className="btn">Read More</Button>
@@ -32,13 +57,16 @@ const ListView = ({ products }) => {
         })}
       </div>
     </Wrapper>
+}
+    </>
   );
 };
 
 const Wrapper = styled.section`
-  padding: 9rem 0;
+  padding: 1rem 0;
   .container {
-    max-width: 120rem;
+    // max-width: 120rem;
+    max-width: 60%;
   }
   .grid {
     gap: 3.2rem;
@@ -77,6 +105,7 @@ const Wrapper = styled.section`
   }
   .card {
     border: 0.1rem solid rgb(170 170 170 / 40%);
+    margin: 2rem;
     .card-data {
       padding: 0 2rem;
     }

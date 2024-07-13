@@ -8,16 +8,16 @@ const FilterContext = createContext();
 const initialState = {
   filterProducts: [],
   allProducts: [],
-  gridView: true,
+  gridView: false,
   sorting_value: "lowest",
   filters: {
     text: "",
-    category: "All",
-    company: "All",
-    color: "All",
-    maxPrice: 0,
-    price: 0,
-    minPrice: 0,
+    // category: "All",
+    // company: "All",
+    // color: "All",
+    // maxPrice: 0,
+    // price: 0,
+    // minPrice: 0,
   },
 };
 

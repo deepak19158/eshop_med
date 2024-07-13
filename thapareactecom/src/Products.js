@@ -7,20 +7,20 @@ import ProductList from "./components/product/ProductList";
 const Products = () => {
   return (
     <Wrapper>
-      <div className="container grid grid-filter-column">
-        <div>
+      {/* <div className="container grid grid-filter-column"> */}
+        <div className="container">
           <FilterSection />
         </div>
 
-        <div className="product-view--sort">
-          <div className="sort-filter">
+        <div className="container product-view--sort">
+          {/* <div className="sort-filter">
             <Sort />
-          </div>
+          </div> */}
           <div className="main-product">
             <ProductList />
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </Wrapper>
   );
 };

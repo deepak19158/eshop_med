@@ -1,14 +1,15 @@
 const cartReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TO_CART":
-      let { productId, color, quantity, product } = action.payload;
+      console.log(action.payload)
+      let { productId,  quantity, product } = action.payload;
       let existingproduct = state.cart.filter(
-        (curElem) => curElem.productId + curElem.color === productId + color
+        (curElem) => curElem.productId === productId 
       );
 
       if (existingproduct.length > 0) {
         const updatedCart = state.cart.map((curElem) => {
-          if (curElem.productId + curElem.color === productId + color) {
+          if (curElem.productId === productId ) {
             curElem.quantity = Math.min(
               curElem.quantity + quantity,
               product.stock
@@ -25,9 +26,8 @@ const cartReducer = (state, action) => {
       let cartProduct = {
         productId: productId,
         name: product.name,
-        color,
         quantity,
-        image: product.image[0].url,
+        // image: product.image[0].url,
         price: product.price,
       };
 

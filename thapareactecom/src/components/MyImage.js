@@ -10,13 +10,13 @@ const MyImage = ({ imgs = [{}] }) => {
           return (
             <figure key={index}>
               <img
-                src={curElem.url}
-                alt={curElem.filename}
+                src={curElem}
+                alt="medicine"
                 className="box-image--style"
                 key={index}
-                onMouseOver={() => {
-                  setCurImg(index);
-                }}
+                // onMouseOver={() => {
+                //   setCurImg(index);
+                // }}
               />
               {/* 155P-buOysH-mq025RYULZZDo0CrVmOxY */}
             </figure>
@@ -24,7 +24,7 @@ const MyImage = ({ imgs = [{}] }) => {
         })}
       </div>
       <div className="main-screen">
-        <img src={imgs[curImg].url} alt={imgs[curImg].filename} />
+        <img src={imgs[curImg]}  />
       </div>
     </Wrapper>
   );

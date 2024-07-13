@@ -136,36 +136,24 @@ const Navbar = () => {
       </div>
       <div className="navBar">
         <ul>
+          {/* <li>
+            <Link to="/">Home</Link>
+          </li> */}
           <li>
-            {/* <a href={"/"} rel="noreferer">
-              Home
-            </a> */}
             <Link to="/">Home</Link>
           </li>
           <li>
-            {/* <a href={"/about"} rel="noreferer">
-              About
-            </a> */}
             <Link to="/about">About</Link>
           </li>
           <li>
-            {/* <a href={"/contact"} rel="noreferer">
-              Contact
-            </a> */}
             <Link to="/contact">Contact</Link>
           </li>
-          <li>
-            {/* <a href={"/products"} rel="noreferer">
-              On Sale
-            </a> */}
+          {/* <li>
             <Link to="/products">Shop</Link>
-          </li>
-          <li>
-            {/* <a href={"/products"} rel="noreferer">
-              New Arrivals
-            </a> */}
+          </li> */}
+          {/* <li>
             <Link to="/products">New Arrivals</Link>
-          </li>
+          </li> */}
 
           {navBar === true ? (
             <>

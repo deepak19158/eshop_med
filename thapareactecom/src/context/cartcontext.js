@@ -51,12 +51,12 @@ const updateProductInMongo = async (data) => {
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const addToCart = (productId, color, quantity, product) => {
+  const addToCart = (productId, quantity, product) => {
     //action for reducer to add procudt to cart
 
     dispatch({
       type: "ADD_TO_CART",
-      payload: { productId, color, quantity, product },
+      payload: { productId,  quantity, product },
     });
   };
 

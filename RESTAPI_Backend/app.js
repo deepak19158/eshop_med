@@ -12,8 +12,9 @@ const email_verification = require("./routes/emailVerification");
 const cors = require("cors");
 
 const PORT = process.env.PORT || 5000;
-const uri = process.env.MONGODB_URL;
+// const uri = process.env.MONGODB_URL;
 
+const uri = 'mongodb+srv://deepak:zATksVZoxgA1TRL0@deepakecom.vybffzz.mongodb.net/med?retryWrites=true&w=majority';
 // const uri = 'mongodb+srv://deepak:zATksVZoxgA1TRL0@deepakecom.vybffzz.mongodb.net/DeepakEcom?retryWrites=true&w=majority';
 
 // middleware or to set router

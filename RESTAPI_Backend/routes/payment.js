@@ -8,7 +8,7 @@ const {
 } = require("../controllers/payment");
 
 router.post("/createorder", createOrder);
-router.post("/success", success);
+router.post("/success/:orderId", success);
 
 router.post("/verifyPayment", verifyPayment);
 

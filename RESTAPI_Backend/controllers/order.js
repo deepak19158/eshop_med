@@ -12,7 +12,13 @@ const placeOrder = async (req, res) => {
 
     const placedOrder = await Order.create(data);
     console.log("----------------->>>>>>>>>>> Order is placed", placedOrder);
-    res.send(placedOrder);
+    // res.send(placedOrder);
+    res.json({
+      orderId: placedOrder._id, // Sending the _id of the newly created order
+      message: 'Order placed successfully',
+      order: placedOrder, // You can send the entire order object if needed
+    });
+
   } catch (error) {
     //if already order exist then return that
     console.log("Error @placing order @controller order line 17 ", error);
@@ -20,6 +26,35 @@ const placeOrder = async (req, res) => {
     res.send(error);
   }
 };
+
+
+const updateOrder = async (req, res) => {
+  const { orderId } = req.params;
+  const { paymentStatus } = req.body;
+
+  console.log("In update order ------>", req.body);
+
+  try {
+    // Find the order by orderId and update paymentStatus
+    const updatedOrder = await Order.findOneAndUpdate(
+      { _id: orderId },
+      req.body,
+      { new: true } // To return the updated document
+    );
+
+    if (!updatedOrder) {
+      return res.status(404).json({ error: 'Order not found' });
+    }
+
+    // Return the updated order as JSON response
+    res.json(updatedOrder);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+}
+
+
 
 const getOrderDetailsById = async (req, res) => {
   const { paymentId } = req.params;
@@ -56,4 +91,4 @@ const getAllOrder = async (req, res) => {
   }
 };
 
-module.exports = { placeOrder, getOrderDetailsById, getAllOrder };
+module.exports = { placeOrder, getOrderDetailsById, getAllOrder, updateOrder};

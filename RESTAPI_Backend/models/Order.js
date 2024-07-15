@@ -6,6 +6,10 @@ const orderSchema = new mongoose.Schema({
     ref: "Product",
     required: true,
   },
+  paymentStatus:{
+    type:String,
+    required:true,
+  },
   billingInfo: {
     firstName: {
       type: String,
@@ -86,16 +90,8 @@ const orderSchema = new mongoose.Schema({
           type: String,
           requierd: true,
         },
-        image: {
-          type: String,
-          required: true,
-        },
         quantity: {
           type: Number,
-          required: true,
-        },
-        color: {
-          type: String,
           required: true,
         },
         price: {
@@ -120,20 +116,18 @@ const orderSchema = new mongoose.Schema({
   paymentDetails: {
     modeOfPayment: {
       type: String,
-      required: true,
+      default: "COD",
+      required: false,
     },
     orderId: {
       type: String,
-      required: true,
-      unique: true,
+      required: false,
     },
     paymentId: {
       type: String,
-      required: true,
-      unique: true,
+      required: false,
     },
   },
-
   prescription:{
     filename:{
       type: String,

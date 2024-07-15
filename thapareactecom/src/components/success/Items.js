@@ -7,8 +7,8 @@ import {
 } from "mdb-react-ui-kit";
 import { useState, useEffect } from "react";
 
-const Items = () => {
-  const [cart, setCart] = useState(null);
+const Items = ({cart}) => {
+  // const [cart, setCart] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -17,13 +17,13 @@ const Items = () => {
     }
   }, [cart]);
 
-  useEffect(() => {
-    const prevOrder = JSON.parse(localStorage.getItem("prevOrderDetails"));
-    console.log(prevOrder);
-    console.log(prevOrder.cartDetails.cart[0]);
-    setCart(prevOrder.cartDetails.cart);
-    if (cart != null) setLoading(false);
-  }, [localStorage.getItem("prevOrderDetails")]);
+  // useEffect(() => {
+  //   const prevOrder = JSON.parse(localStorage.getItem("prevOrderDetails"));
+  //   console.log(prevOrder);
+  //   console.log(prevOrder.cartDetails.cart[0]);
+  //   setCart(prevOrder.cartDetails.cart);
+  //   if (cart != null) setLoading(false);
+  // }, [localStorage.getItem("prevOrderDetails")]);
 
   return (
     <>

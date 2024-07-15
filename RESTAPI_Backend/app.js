@@ -1,4 +1,4 @@
-require("dotenv").config({path:'./env'});
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const connectDB = require("./db/connect");
@@ -13,6 +13,7 @@ const cors = require("cors");
 
 const PORT = process.env.PORT || 5000;
 const uri = process.env.MONGODB_URL;
+console.log("Here is the URI -------> ",uri);
 
 // const uri = 'mongodb+srv://deepak:zATksVZoxgA1TRL0@deepakecom.vybffzz.mongodb.net/med?retryWrites=true&w=majority';
 // const uri = 'mongodb+srv://deepak:zATksVZoxgA1TRL0@deepakecom.vybffzz.mongodb.net/DeepakEcom?retryWrites=true&w=majority';

@@ -27,80 +27,39 @@ const Success = () => {
   const { clearCart } = useCartContext();
   const [loading, setLoading] = useState(true); //loading variable - to render component - after all logic & api call
 
-  useEffect(() => {
-    // useEffect for gettting paymnet parameter
-    const searchParams = new URLSearchParams(location.search);
-    const jsonData = searchParams.get("data");
-    const parsedData = JSON.parse(jsonData);
 
+  useEffect(() => {
+    
+    console.log("line 67 Success.js going to place order");
+
+    //this is called multiple time we need only once when it has complete information and modeofpayment is upadted very lastly
+    console.log(`${process.env.REACT_APP_HYPERTEXT}://${process.env.REACT_APP_BACKEND_URL}/api/order/updatingPlacedOrder`);
     axios
-      .get(
-        `${process.env.REACT_APP_HYPERTEXT}://${process.env.REACT_APP_BACKEND_URL}/api/paymentInfo/${parsedData.razorpay_payment_id}`
+      .put(
+        `${process.env.REACT_APP_HYPERTEXT}://${process.env.REACT_APP_BACKEND_URL}/api/order/updateOrder/${localStorage.getItem('orderId')}`,
+        {
+          paymentStatus: "Success"
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("authToken"),
+          },
+        }
       )
       .then((res) => {
-        refillCompleteOrder(); //updating order details to state from local storage - orderDetails key
-        updatePaymentDetails({
-          //updating payment details of the order
-          ...parsedData,
-          modeOfPayment: res.data.method,
-        });
+        console.log(res);
+        setData(res);
+        setLoading(false);
+        clearCart();
+        clearOrderContextState();
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [location]);
-
-  useEffect(() => {
-    if (
-      state.paymentDetails.modeOfPayment !== "" &&
-      state.billingInfo.firstName !== "" //so that if user refresh the page palce order api shouldn't be called with empty feilds
-    ) {
-      console.log("line 67 Success.js going to place order");
-
-      let formData = new FormData();
-
-      // Append fields from state
-      console.log(state);
-      Object.keys(state).forEach(key => {
-        console.log(key +"->" +JSON.stringify(state[key]));
-      })
-
-      formData.append("abc","def");
-      console.log(formData.get("abc"));
-
-
-      //this is called multiple time we need only once when it has complete information and modeofpayment is upadted very lastly
-      console.log(`${process.env.REACT_APP_HYPERTEXT}://${process.env.REACT_APP_BACKEND_URL}/api/order/placeOrder`);
-      axios
-        .post(
-          `${process.env.REACT_APP_HYPERTEXT}://${process.env.REACT_APP_BACKEND_URL}/api/order/placeOrder`,
-          {
-            ...state,
-            // formData
-          },
-          {
-            headers: {
-              // 'Content-Type': 'multipart/form-data',
-              "Content-Type": "application/json",
-              // 'Content-Type': 'application/octet-stream',
-              "auth-token": localStorage.getItem("authToken"),
-            },
-          }
-        )
-        .then((res) => {
-          console.log(res);
-          setData(res);
-          localStorage.setItem("prevOrderDetails", JSON.stringify(state)); //updating prevOrder details with state having all correct values
-          // localStorage.removeItem("orderDetails");
-          setLoading(false);
-          clearCart();
-          clearOrderContextState();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, [state.paymentDetails]);
+    
+  }, []);
+  
 
   return (
     <>
@@ -129,8 +88,8 @@ const Success = () => {
                         Order Id : {data.data._id}
                       </p>
                     </div>
-                    <Items />
-                    <Details />
+                    <Items cart={data.data.cartDetails.cart}/>
+                    <Details Order={data.data} />
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>

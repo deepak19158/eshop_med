@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { MDBCol, MDBContainer, MDBRow } from "mdb-react-ui-kit";
 
-const Details = () => {
-  const [Order, setOrder] = useState(null);
+const Details = ({Order}) => {
+  // const [Order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -12,12 +12,12 @@ const Details = () => {
     }
   }, [Order]);
 
-  useEffect(() => {
-    const prevOrder = JSON.parse(localStorage.getItem("prevOrderDetails"));
-    console.log(typeof prevOrder);
-    setOrder(prevOrder);
-    if (Order != null) setLoading(false);
-  }, [localStorage.getItem("prevOrderDetails")]);
+  // useEffect(() => {
+  //   const prevOrder = JSON.parse(localStorage.getItem("prevOrderDetails"));
+  //   console.log(typeof prevOrder);
+  //   setOrder(prevOrder);
+  //   if (Order != null) setLoading(false);
+  // }, [localStorage.getItem("prevOrderDetails")]);
 
   return (
     <>
@@ -40,6 +40,7 @@ const Details = () => {
               <MDBCol md="6" className="mb-4">
                 <h4>Billing Address</h4>
                 <p style={{ fontSize: "14px" }}>
+                  {Order.billingInfo.firstName} {Order.billingInfo.lastName},{" "},
                   {Order.billingInfo.address}, {Order.billingInfo.city},{" "}
                   {Order.billingInfo.state}, {Order.billingInfo.pinCode}
                 </p>
@@ -47,6 +48,7 @@ const Details = () => {
               <MDBCol md="6" className="mb-4">
                 <h4>Shipping Address</h4>
                 <p style={{ fontSize: "14px" }}>
+                  {Order.shippingInfo.firstName} {Order.shippingInfo.lastName},{" "},
                   {Order.shippingInfo.address}, {Order.shippingInfo.city},{" "}
                   {Order.shippingInfo.state}, {Order.shippingInfo.pinCode}
                 </p>

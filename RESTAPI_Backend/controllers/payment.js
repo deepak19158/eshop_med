@@ -1,3 +1,5 @@
+const Order = require("../models/Order");
+
 const Razorpay = require("razorpay");
 const crypto = require("crypto");
 
@@ -49,13 +51,52 @@ const verifyPayment = (req, res) => {
   // res.status(200).json({ redirectTo: `/success?data=${JSON.stringify(data)}` });
 };
 
-const success = (req, res) => {
-  //   console.log(res.body);
-  const { razorpay_payment_id, razorpay_order_id } = req.body;
+const success = async (req, res) => {
+  const { orderId } = req.params;
+  console.log("order id in succcess controller ",orderId);
+  console.log(req.body);
 
-  const data = req.body;
-  console.log("success ---> ", data);
-  res.redirect(`http://localhost:3000/success?data=${JSON.stringify(data)}`);
+  if (req.body.hasOwnProperty('razorpay_payment_id')) {
+    // Do something if razorpay_payment_id is present
+
+    const { razorpay_payment_id, razorpay_order_id } = req.body;
+
+    const paymentId = razorpay_payment_id;
+    const paymentDetails = await instance.payments.fetch(paymentId);
+    const jsonBody = {
+        "paymentDetails":{
+          "modeOfPayment":paymentDetails.method,
+          "orderId":razorpay_order_id,
+          "paymentId":razorpay_order_id
+        }
+      }
+    
+    console.log("json body for payment details",jsonBody);
+
+    const updatedOrder = await Order.findOneAndUpdate(
+      { _id: orderId },
+      jsonBody,
+      { new: true } // To return the updated document
+    );
+
+    console.log("Order update for online payment",updatedOrder)
+    //can get mode of payment using paymentinfo api and then update Order direclty from here after calling update order API
+
+    res.redirect(`${process.env.FRONTEND_URL}/success`);
+    // res.redirect(`http://localhost:3000/success`);
+
+
+  } 
+  else {
+    // Do something else if razorpay_payment_id is not present
+    console.log("it is a COD order");
+    
+    res.redirect(`${process.env.FRONTEND_URL}/success`);
+    // res.redirect(`http://localhost:3000/success`);
+  }
+
+  // res.redirect(`${process.env.FRONTEND_URL}/success`);
+
 };
 
 module.exports = { createOrder, success, verifyPayment };

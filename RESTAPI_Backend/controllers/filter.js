@@ -12,7 +12,7 @@ const getItemByName = async (req, res) => {
 
     let filteredProduct = [];
     matches.ratings.forEach((curElem,index)=>{
-        if(curElem.rating>=0.5){
+        if(curElem.rating>=0.4){
             filteredProduct.push(products[index]);
         }
     })

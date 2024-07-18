@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { createContext, useReducer, useEffect } from "react";
 import { useProductContext } from "./productcontext";
 import reducer from "../reducer/filterReducer";
+import axios from "axios";
 
 const FilterContext = createContext();
 
@@ -12,13 +13,26 @@ const initialState = {
   sorting_value: "lowest",
   filters: {
     text: "",
-    // category: "All",
-    // company: "All",
-    // color: "All",
-    // maxPrice: 0,
-    // price: 0,
-    // minPrice: 0,
   },
+  search : false,
+};
+
+const getFilteredProducts = async (name) => {
+
+  const product = await axios.post(
+    `${process.env.REACT_APP_HYPERTEXT}://${process.env.REACT_APP_BACKEND_URL}/api/filter/ByName`,
+    {
+      "name":name
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("authToken"),
+      },
+    }
+  );
+  // console.log(product)
+  return product.data.products;
 };
 
 export const FilterContextProvider = ({ children }) => {
@@ -32,6 +46,10 @@ export const FilterContextProvider = ({ children }) => {
 
   const setListView = () => {
     return dispatch({ type: "SET_LISTVIEW" });
+  };
+
+  const toggleSearch = () => {
+    return dispatch({ type: "TOGGLE_SEARCH" });
   };
 
   const sorting = (event) => {
@@ -50,9 +68,22 @@ export const FilterContextProvider = ({ children }) => {
     return dispatch({ type: "CLEAR_FILTERS" });
   };
   // function to sort
-  useEffect(() => {
-    dispatch({ type: "FILTER_PRODUCTS" });
-  }, [state.filters]);
+  useEffect( () => {
+    if(state.filters.text!=""){
+      
+      const fetchData = async () => {
+        try {
+          const filteredProducts = await getFilteredProducts(state.filters.text);
+          dispatch({ type: "FILTER_PRODUCTS" , payload:{filteredProducts} });
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+      fetchData();
+      
+      
+    }
+  }, [state.search]);
 
   useEffect(() => {
     dispatch({ type: "SORTING_PRODUCTS" });
@@ -70,6 +101,7 @@ export const FilterContextProvider = ({ children }) => {
         setListView,
         sorting,
         updateFilterValue,
+        toggleSearch,
         clearFilters,
       }}
     >

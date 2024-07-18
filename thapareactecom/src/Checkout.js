@@ -71,12 +71,12 @@ const Checkout = () => {
     //         },
     //       }
     //     )
-    //     .then((res)=>{
-    //       console.log("order palced on COD",res);
-    //     })
-    //     .catch((err)=>{
-    //       console.log("error on placing COD",err);
-    //     })
+        // .then((res)=>{
+        //   console.log("order palced on COD",res);
+        // })
+        // .catch((err)=>{
+        //   console.log("error on placing COD",err);
+        // })
     window.location.href = '/success';
   }
 

@@ -10,13 +10,14 @@ const FilterSection = () => {
   const {
     filters: { text },
     updateFilterValue,
+    toggleSearch
   } = useFilterContext();
 
 
   return (
     <Wrapper>
       <div className="filter-search">
-        <form onSubmit={(e) => e.preventDefault()}>
+        {/* <form onSubmit={(e) => e.preventDefault()}>
           <input
             type="text"
             name="text"
@@ -25,7 +26,16 @@ const FilterSection = () => {
             placeholder="Medicine"
             style={{ maxWidth: '100%' }}
           />
-        </form>
+        </form> */}
+        <div className="input-group" style={{ borderColor: '#3b71ca', borderWidth: '1px', borderStyle: 'solid', borderRadius: '4px' }}>
+          <div className="form-outline" data-mdb-input-init>
+            <input type="text" id="form1" name="text" value={text} onChange={updateFilterValue} placeholder="Search" className="form-control" />
+            {/* <label className="form-label" for="form1">Search</label> */}
+          </div>
+          <button type="button" class="btn btn-primary" onClick={toggleSearch} data-mdb-ripple-init>
+            <i className="fas fa-search"></i>
+          </button>
+        </div>
       </div>
       
     </Wrapper>
@@ -47,7 +57,7 @@ const Wrapper = styled.section`
     margin: 0 auto; /* Center align horizontally */
   
     input {
-      width: 100%;
+      // width: 100%;
       padding: 0.6rem 0.5rem;
       height: 40px;
       box-sizing: border-box; /* Ensure padding is included in the width */

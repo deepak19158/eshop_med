@@ -4,8 +4,6 @@ import reducer from "../reducer/productReducer";
 
 const AppContext = createContext();
 
-// const API = "https://api.pujakaitem.com/api/products";
-// const API = `https://${process.env.REACT_APP_BACKEND_URL}/api/products`;
 const API = `${process.env.REACT_APP_HYPERTEXT}://${process.env.REACT_APP_BACKEND_URL}/api/products`;
 
 const initialState = {

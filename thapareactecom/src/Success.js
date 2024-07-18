@@ -51,6 +51,7 @@ const Success = () => {
         console.log(res);
         setData(res);
         setLoading(false);
+        localStorage.removeItem('orderId');
         clearCart();
         clearOrderContextState();
       })

@@ -8,29 +8,29 @@ import { useEffect, useState } from "react";
 
 const ListView = ({ products}) => {
 
-  const [loading, setLoading] = useState(false);
-  const [updatedProducts, setUpdatedProducts] = useState([]);
-  console.log(products);
-  // const [products,setProducts] = useState([]);
+  // const [loading, setLoading] = useState(false);
+  // const [updatedProducts, setUpdatedProducts] = useState([]);
+  // console.log(products);
+  // // const [products,setProducts] = useState([]);
   
 
-  useEffect(()=>{
-    console.log(products)
-    if(products){
-      setLoading(true);
-      setUpdatedProducts(products.slice(0,10));
-    }
-  },[products])
+  // useEffect(()=>{
+  //   console.log(products)
+  //   if(products){
+  //     setLoading(true);
+  //     setUpdatedProducts(products);
+  //   }
+  // },[products])
 
 
   // const products = products_arr.slice(0,10);
 
   return (
     <>
-    {!loading?<div>laoding</div>:
+    {/* {!loading?<div>laoding</div>: */}
     <Wrapper className="section">
       <div className="container-grid">
-        {updatedProducts.map((curElem) => {
+        {products.map((curElem) => {
           const { _id, name,  company, price, pack, code } = curElem;
 
           return (
@@ -57,7 +57,7 @@ const ListView = ({ products}) => {
         })}
       </div>
     </Wrapper>
-}
+{/* } */}
     </>
   );
 };

@@ -9,6 +9,7 @@ const auth_routes = require("./routes/auth");
 const payment_route = require("./routes/payment");
 const payment_info = require("./routes/paymentInfo");
 const email_verification = require("./routes/emailVerification");
+const filter = require("./routes/filter");
 const cors = require("cors");
 
 const PORT = process.env.PORT || 5000;
@@ -29,6 +30,7 @@ app.use("/api/payment", payment_route);
 app.use("/api/paymentInfo", payment_info);
 app.use("/api/order", order_routes);
 app.use("/api/emailverification", email_verification);
+app.use("/api/filter", filter);
 app.use("/cart", cart_routes);
 
 app.get("/", (req, res) => {

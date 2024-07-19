@@ -15,6 +15,7 @@ const initialState = {
     text: "",
   },
   search : false,
+  loading:false,
 };
 
 const getFilteredProducts = async (name) => {
@@ -67,6 +68,15 @@ export const FilterContextProvider = ({ children }) => {
   const clearFilters = () => {
     return dispatch({ type: "CLEAR_FILTERS" });
   };
+
+  const setLoadingTrue = ()=>{
+    return dispatch({type:"SET_LOADING_TRUE"})
+  }
+
+  const setLoadingFalse = ()=>{
+    return dispatch({type:"SET_LOADING_FALSE"})
+  }
+
   // function to sort
   useEffect( () => {
     if(state.filters.text!=""){
@@ -75,6 +85,7 @@ export const FilterContextProvider = ({ children }) => {
         try {
           const filteredProducts = await getFilteredProducts(state.filters.text);
           dispatch({ type: "FILTER_PRODUCTS" , payload:{filteredProducts} });
+          setLoadingFalse();
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -101,6 +112,8 @@ export const FilterContextProvider = ({ children }) => {
         setListView,
         sorting,
         updateFilterValue,
+        setLoadingTrue,
+        setLoadingFalse,
         toggleSearch,
         clearFilters,
       }}

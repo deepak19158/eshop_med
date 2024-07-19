@@ -5,20 +5,20 @@ import ListView from "../filter/ListView";
 import { useEffect, useState } from "react";
 
 const ProductList = () => {
-  const { filterProducts, gridView } = useFilterContext();
-  const [loading, setLoading] = useState(false);
+  const { filterProducts, gridView, loading } = useFilterContext();
+  const [loadingUpdatedProduct, setLoadingUpdatedProduct] = useState(false);
   const [updatedProducts, setUpdatedProducts] = useState([]);
   
 
   useEffect(()=>{
     
     if(filterProducts){
-      setLoading(true);
+      setLoadingUpdatedProduct(true);
       setUpdatedProducts(filterProducts.slice(0,10));
     }
   },[filterProducts])
 
-  if(!loading){
+  if(!loadingUpdatedProduct && !loading){
     return <p>Loading</p>
   }
 

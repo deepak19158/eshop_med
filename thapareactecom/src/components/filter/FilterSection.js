@@ -10,8 +10,15 @@ const FilterSection = () => {
   const {
     filters: { text },
     updateFilterValue,
-    toggleSearch
+    toggleSearch,
+    setLoadingTrue,
+
   } = useFilterContext();
+
+  const handleOnClick = ()=>{
+    toggleSearch();
+    setLoadingTrue();
+  }
 
 
   return (
@@ -32,7 +39,7 @@ const FilterSection = () => {
             <input type="text" id="form1" name="text" value={text} onChange={updateFilterValue} placeholder="Search" className="form-control" />
             {/* <label className="form-label" for="form1">Search</label> */}
           </div>
-          <button type="button" class="btn btn-primary" onClick={toggleSearch} data-mdb-ripple-init>
+          <button type="button" class="btn btn-primary" onClick={handleOnClick} data-mdb-ripple-init>
             <i className="fas fa-search"></i>
           </button>
         </div>

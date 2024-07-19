@@ -8,23 +8,6 @@ import { useEffect, useState } from "react";
 
 const ListView = ({ products}) => {
 
-  // const [loading, setLoading] = useState(false);
-  // const [updatedProducts, setUpdatedProducts] = useState([]);
-  // console.log(products);
-  // // const [products,setProducts] = useState([]);
-  
-
-  // useEffect(()=>{
-  //   console.log(products)
-  //   if(products){
-  //     setLoading(true);
-  //     setUpdatedProducts(products);
-  //   }
-  // },[products])
-
-
-  // const products = products_arr.slice(0,10);
-
   return (
     <>
     {/* {!loading?<div>laoding</div>: */}

@@ -25,6 +25,18 @@ const filterReducer = (state, action) => {
         search:!state.search,
       }
 
+    case "SET_LOADING_TRUE":
+      return {
+        ...state,
+        loading:true,
+      }
+
+    case "SET_LOADING_FALSE":
+      return {
+        ...state,
+        loading:false,
+      }
+      
     case "SET_LISTVIEW":
       return {
         ...state,

@@ -35,9 +35,9 @@ const Checkout = () => {
       key: "rzp_test_dKhJ2jiI5qasOl", // Enter the Key ID generated from the Dashboard
       amount: amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
       currency: "INR",
-      name: `${process.env.COMPANY_NAME}`,
+      name: `${process.env.REACT_APP_COMPANY_NAME}`,
       description: "Test Transaction",
-      image: `${process.env.COMPANY_LOGO}`,
+      image: `${process.env.REACT_APP_COMPANY_LOGO}`,
       order_id: order_id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
       callback_url: `${process.env.REACT_APP_HYPERTEXT}://${process.env.REACT_APP_BACKEND_URL}/api/payment/success/${localStorage.getItem('orderId')}`,
       // callback_url: "http://localhost:3000/try",

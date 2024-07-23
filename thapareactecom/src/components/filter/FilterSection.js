@@ -4,11 +4,12 @@ import { FaCheck } from "react-icons/fa";
 import { useFilterContext } from "../../context/filtercontext";
 import FormatPrice from "../../utils/FormatPrice";
 import { Button } from "../../styles/Button";
+import { MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem } from 'mdb-react-ui-kit';
 
 const FilterSection = () => {
 
   const {
-    filters: { text },
+    filters: { text ,category},
     updateFilterValue,
     toggleSearch,
     setLoadingTrue,
@@ -18,6 +19,14 @@ const FilterSection = () => {
   const handleOnClick = ()=>{
     toggleSearch();
     setLoadingTrue();
+  }
+
+  const handleDropdown = (event)=>{
+    updateFilterValue({"name":event.target.getAttribute('name'), "value":event.target.textContent})
+  }
+
+  const handleTextSearch = (event)=>{
+    updateFilterValue({"name":event.target.name, "value":event.target.value})
   }
 
 
@@ -35,8 +44,18 @@ const FilterSection = () => {
           />
         </form> */}
         <div className="input-group" style={{ borderColor: '#3b71ca', borderWidth: '1px', borderStyle: 'solid', borderRadius: '4px' }}>
+          <MDBDropdown group className='shadow-0'>
+            <MDBDropdownToggle color='light' style={{ fontSize: '12px' }} >{category}</MDBDropdownToggle>
+            <MDBDropdownMenu >
+              <label name="category" value="ALL" onClick={handleDropdown}  >ALL</label>
+              <br/>
+              <label name="category" value="MEDICINE" onClick={handleDropdown} >MEDICINE</label>
+              <br/>
+              <label name="category" value="LAB" onClick={handleDropdown} >LAB</label>
+            </MDBDropdownMenu>
+          </MDBDropdown>
           <div className="form-outline" data-mdb-input-init>
-            <input type="text" id="form1" name="text" value={text} onChange={updateFilterValue} placeholder="Search" className="form-control" />
+            <input type="text" id="form1" name="text" value={text} onChange={handleTextSearch} placeholder="Search" className="form-control" />
             {/* <label className="form-label" for="form1">Search</label> */}
           </div>
           <button type="button" class="btn btn-primary" onClick={handleOnClick} data-mdb-ripple-init>
@@ -70,6 +89,13 @@ const Wrapper = styled.section`
       box-sizing: border-box; /* Ensure padding is included in the width */
     }
   }
+
+  label {
+    font-size: 1.2rem;
+    padding-left: 8px;
+    cursor: pointer;
+  }
+
   .filter-category {
     div {
       display: flex;

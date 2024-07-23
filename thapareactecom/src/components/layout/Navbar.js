@@ -18,7 +18,7 @@ const Navbar = () => {
     <header>
       <div className="topBar">
         <div className="subSection d-flex justify-content-center align-items-center">
-          <div className="brandName">XYZ Company</div>
+          <div className="brandName">{process.env.REACT_APP_COMPANY_NAME}</div>
           <div className="extras">
             <div className="extrasBox">
               <div className="extrasLogo">

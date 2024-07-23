@@ -5,6 +5,7 @@ import FormatPrice from "../../utils/FormatPrice";
 import imagePath from "../../utils/medicine.jpg";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Pagenation from "../product/Pagenation";
 
 const ListView = ({ products}) => {
 
@@ -36,7 +37,7 @@ const ListView = ({ products}) => {
                 </NavLink>
               </div>
             </div>
-          );
+          )
         })}
       </div>
     </Wrapper>
@@ -46,7 +47,7 @@ const ListView = ({ products}) => {
 };
 
 const Wrapper = styled.section`
-  padding: 1rem 0;
+  // padding: 1rem 0;
   .container {
     // max-width: 120rem;
     max-width: 60%;

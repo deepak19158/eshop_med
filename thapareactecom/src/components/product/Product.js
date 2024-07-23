@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import FormatPrice from "../../utils/FormatPrice";
+import imagePath from "../../utils/medicine.jpg";
 import "../../styles/Product.css";
 
 const Product = (curElem) => {
@@ -8,7 +9,7 @@ const Product = (curElem) => {
   return (
     <div className="productCard">
       <div className="productCardImg">
-        <img src={image[0].url} alt={name} />
+        <img src={imagePath} alt={name} />
       </div>
       <div className="productCardBody">
         <h5>{category}</h5>

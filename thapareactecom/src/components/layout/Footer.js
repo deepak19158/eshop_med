@@ -17,12 +17,12 @@ export default function App() {
       <div className="footerLinks">
         <div className="footerContact">
           <h5>Need Help</h5>
-          <p className="contact">+91 1234 5678 90</p>
+          <p className="contact">{`+91 ${process.env.REACT_APP_CONTACT_NO}`}</p>
           <p>Monday - Friday: 9:00-20:00</p>
           <p>Saturday: 11:00 - 15:00</p>
           <h6>
             <Link to="/contact" style={{ color: "#bbb" }}>
-              abcd@gmail.com
+              {`${process.env.REACT_APP_EMAIL}`}
             </Link>
           </h6>
           <div

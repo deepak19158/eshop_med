@@ -8,8 +8,9 @@ import { HeroSection as HeroSection2 } from "./components/HeroSection";
 export default function About() {
   // const { myName } = useProductContext();
 
+
   const data = {
-    name: "XYZ Company",
+    name: `${process.env.REACT_APP_COMPANY_NAME}`,
   };
   return (
     <header>
